@@ -1,0 +1,137 @@
+html {
+    font-size: 62.5%;
+}
+
+:root {
+  --font: 'Montserrat', sans-serif;
+  --soft-black: #232b2b;
+  --gray: #808080; 
+  --white: #FFFFFF;
+  --light-gray: #DCDCDC;
+  --very-light-gray: #F0F0F0; 
+  --blue: #0396FF;
+}
+
+h1 {
+  font-family: var(--font);
+  font-size: 5rem;
+}
+
+
+i:hover {
+    color: var(--blue);
+    cursor: pointer;
+    transition: 0.3s; 
+}
+
+p {
+    font-family: var(--font);
+    font-weight: 500; 
+    color: var(--gray);
+    font-size: 1.25rem;
+    letter-spacing: 0.25px;
+}
+
+.blurb {
+    font-family: var(--font);
+    font-weight: 500; 
+    color: var(--white);
+    font-size: 1.25rem;
+    margin-top: -20px;
+}
+
+.border {
+    border: 1px solid var(--light-gray);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+.postBox {
+    /* height: 100px; */
+    width: 350px;
+}
+
+.postContainer {
+    height: 550px;
+    width: 1600px;
+    background: rgb(0, 0, 0);
+    
+    postBox-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.form-styling {
+    
+    background: var(--very-light-gray);
+    border: 1px solid var(--very-light-gray);
+    border-radius: 2px;
+    padding: 10px;
+    width: 90%;
+    
+}
+
+.margin-right-sm {
+    margin-right: 30px;
+}
+
+.margin-top-sm {
+    margin-top: 15px;
+}
+
+.margin-top {
+    margin-top: 30px;
+}
+
+.sign-up{
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+    width: 50%;
+    height: 98%; 
+    color: var(--soft-black);
+    color:white;
+    padding: 5px 20px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: var(--gray); */
+    color: white;
+    margin-top: -10px;
+}
+
+.postWelcome {
+    
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+  color: var(--white);
+}
+
+
