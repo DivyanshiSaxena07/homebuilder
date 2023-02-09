@@ -17,7 +17,12 @@ const postSlice = createSlice({
         error:""
     }
 },
-    reducers:{},
+    reducers:{
+        addPost:(state,action)=>{
+            let result=action.payload;
+            state.value.posts=[...state.value.posts,result];
+        }
+    },
     extraReducers:(builder)=>{
         builder.addCase(fetchPosts.pending,(state,action)=>{
             state.value.posts =[];
@@ -33,4 +38,5 @@ const postSlice = createSlice({
         });
     },
 });
+export const {addPost}=postSlice.actions;
 export default postSlice.reducer;

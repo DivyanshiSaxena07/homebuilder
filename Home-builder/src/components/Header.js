@@ -13,17 +13,18 @@ const Header = () => {
   const [user,setUser] = useState("");
   const [name,setName] = useState("");
   let dispatch = useDispatch();
-   const signup = () =>{
+   const signup = async() =>{
     let obj = {
       name:name,
       email:signUpEmail,
       password:signUpPassword,
       user:user
     }
-  let response = axios.post("http://localhost:3000/user/signup",obj);
+  let response = await axios.post("http://localhost:3000/user/signup",obj);
   dispatch(setCustomer(obj));
 
- 
+  alert("SignUp Successfull!");
+  // alert(response.data.user);
   navigate("/home",response.data.user);
 //  console.log(response.data.user);
    }

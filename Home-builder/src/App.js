@@ -5,6 +5,7 @@ import IndexPage from "./components/IndexPage";
 import CreatePost from "./components/CreatePost.js";
 import {fetchPosts} from "./components/Slices/postSlice.js";
 import { useDispatch } from 'react-redux';
+import SavePost from "./components/SavedPost.js";
 function App() {
   let dispatch = useDispatch();
   dispatch(fetchPosts());
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<IndexPage/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
       <Route path="/createPost" element={<CreatePost/>}></Route>
+      <Route path="/savePost" element={<SavePost/>}></Route>
     </Routes>
     </div>
   );

@@ -24,6 +24,20 @@ const postSchema= new mongoose.Schema({
     },
     like:{
       type:Number
-    }
+    },
+
+    
+    comment:[{
+
+            comment:{
+                type:String,
+                
+              },
+
+            userId:{
+                type:mongoose.Schema.ObjectId,
+                ref:"user"
+            }
+}]
 })
 export const Post=mongoose.model('post',postSchema);

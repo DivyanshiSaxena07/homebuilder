@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import postRoute from './router/postRoute.js';
 import likeRoute from './router/likeRoute.js';
+import commentRoute from "./router/commentRoute.js";
+import savePostRoute from "./router/savePostRoute.js";
 import path from 'path';
 import {fileURLToPath} from 'url';
 
@@ -19,7 +21,7 @@ app.use(cors());
 
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://shubhamjoshi:hWVIOMroSTGL3rbC@cluster0.w2m9xjp.mongodb.net/homebuilder?retryWrites=true&w=majority',err=>{
+mongoose.connect('mongodb+srv://divyanshi:root@cluster.1wtwgej.mongodb.net/HomeBuilder?retryWrites=true&w=majority',err=>{
     if(err)
     console.log(err);
     else{
@@ -31,6 +33,8 @@ mongoose.connect('mongodb+srv://shubhamjoshi:hWVIOMroSTGL3rbC@cluster0.w2m9xjp.m
         app.use('/user',UserRoute);
         app.use('/post',postRoute);
         app.use('/like',likeRoute);
+        app.use("/comment",commentRoute);
+        app.use('/savedPost',savePostRoute);
         app.listen(3000,()=>{
             console.log("Server started!");
         });
