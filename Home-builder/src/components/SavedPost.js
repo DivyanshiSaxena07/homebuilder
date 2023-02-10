@@ -1,19 +1,13 @@
 import Footer from "./Footer";
 import './css/savePost.css';
 import { useSelector } from "react-redux";
+import savePostSlice from "./Slices/savePostSlice";
 
 function SavePost(){
-//  const {postList}=useSelector(state=>state.Saved.value)
-//  console.log(postList);
+    let savePost =useSelector(state=>state.SavePost.value);
+
  return<>
-    {/* <Header/>/ */}
-{/* {postList.map((item,index)=>{
-    return<div><h1>{index+1}</h1>
-    <h1>{item.postId}</h1>
-    <h1>{item.postName}</h1>
-    <h1>{item.postImage}</h1>
-    </div>
-})} */}
+   
     <header>
 <div className="container">
 
@@ -60,14 +54,15 @@ function SavePost(){
 </header>
 
 <main>
-
+  
 <div className="container">
 
     <div className="gallery">
 
         <div className="gallery-item" tabIndex="0">
 
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" className="gallery-image" alt=""/>
+        <img src={"http://localhost:3000/postImages/" + savePost.postImage} style={{ width: "100%", height: "80vh" }} alt="post-1" className="cover" />
+
 
             <div className="gallery-item-info">
 
@@ -80,7 +75,7 @@ function SavePost(){
 
         </div>
 
-        <div className="gallery-item" tabIndex="0">
+        {/* <div className="gallery-item" tabIndex="0">
 
             <img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" className="gallery-image" alt=""/>
 
@@ -279,7 +274,7 @@ function SavePost(){
 
             </div>
 
-        </div>
+        </div> */}
 
     </div>
     

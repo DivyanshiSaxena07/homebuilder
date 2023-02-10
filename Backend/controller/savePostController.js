@@ -12,11 +12,11 @@ import { Saved } from "../model/savePostModel.js";
 // }
 export const savedPost = async (request,response,next)=>{
     let post = await Post.findById(request.body.postId);
-    console.log("Saved post called");
-    console.log(request.body._id)
+    console.log(post);
     let currentUserId = request.body.userId;
-    console.log(currentUserId)
+    // console.log(currentUserId)
     let user  = await Saved.findOne({userId: currentUserId});
+    console.log(user)
     if(user){
       let index = 0;
       for( ; index<user.postList.length; index++){
@@ -27,9 +27,8 @@ export const savedPost = async (request,response,next)=>{
       }
       if(index == user.postList.length){
            user.postList.push({
-            postId: post._id,
-            postName: post.postName,
-            postImage: post.postImage
+            postId: request.body.postId,
+            postImage: request.body.postImage
           });
           let status = await Saved.create(user);
           return response.status(200).json({message: 'Successfully added in cart'}); 
@@ -39,14 +38,13 @@ export const savedPost = async (request,response,next)=>{
         let result = await Saved.create({
             userId: currentUserId,
             postList:[{
-                postId: post,
-                postName: request.body.postName,
+                postId: request.body.postId,
                 postImage: request.body.postImage
               }
             ]
         })
         console.log(result);
-        console.log(request.body.postName);
+        // console.log(request.body.postName);
         let status = await Saved.create(result);
 
         return response.status(200).json({result:result,message: 'Successfully added in cart'});
@@ -68,7 +66,7 @@ export const cartList = async (req, res, next) => {
 
     let userId = req.body.userId;
     console.log(req.body.userId)
-    let cartItems = await Saved.findOne(req.body.userId)
+    let cartItems = await Saved.findOne({userId:req.body.userId})
     let items = [];
     console.log(cartItems)
     if (cartItems) {

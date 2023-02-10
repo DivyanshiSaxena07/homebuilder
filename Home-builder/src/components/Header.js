@@ -1,19 +1,26 @@
 import axios from "axios";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
+import { auth, db, storage } from "../firebase";
 import { fetchPosts } from "./Slices/postSlice";
 import { setCustomer } from "./Slices/userSlice";
+import Add from "../image/logo.png";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 const Header = () => {
   const navigate = useNavigate();
+  let [fileName,setFileName] = useState("");
   const [signUpEmail,setSignUpEmail] = useState("");
   const [signUpPassword,setSignUpPassword] = useState("");
   const [loginEmail,setLoginEmail] = useState("");
   const [loginPassword,setLoginPassword] = useState("");
   const [user,setUser] = useState("");
   const [name,setName] = useState("");
+  const [err, setErr] = useState(false);
   let dispatch = useDispatch();
-   const signup = async() =>{
+   const signup = async(e) =>{
     let obj = {
       name:name,
       email:signUpEmail,
@@ -27,9 +34,68 @@ const Header = () => {
   // alert(response.data.user);
   navigate("/home",response.data.user);
 //  console.log(response.data.user);
+
+e.preventDefault();  
+const displayName = e.target[0].value;
+const email = e.target[1].value;
+const password = e.target[2].value;
+const file = e.target[3].files[0]; 
+
+try {
+const res = await createUserWithEmailAndPassword(auth, email, password)
+
+const storageRef = ref(storage,displayName);
+
+const uploadTask = uploadBytesResumable(storageRef, file);
+
+uploadTask.on(
+
+  (error) => {
+    setErr(true);
+  }, 
+  () => {
+    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      await updateProfile(res.user,{
+        displayName,
+        photoURL:downloadURL,
+      });
+      await setDoc(doc(db,"users",res.user.uid),{
+        uid:res.user.uid,
+       displayName,
+       email,
+       photoURL: downloadURL,
+      });
+
+      await  setDoc(doc (db,"userChats", res.user.uid),{});
+      navigate("/home");
+
+    });
+  }
+);
+
+
+
+}catch(err){
+setErr(true);
+}
+
+
+
+
+
+
+
    }
-   const login = async () =>{
-    let response = await axios.post("http://localhost:3000/user/login",{email:loginEmail,password:loginPassword});
+
+
+
+
+const login = async (e) =>{
+    const email = e.target[0].value;
+const password = e.target[1].value;
+
+try {
+   let response = await axios.post("http://localhost:3000/user/login",{email:loginEmail,password:loginPassword});
          if(response.request.status==200)
          {
           dispatch(setCustomer(response.data.user));
@@ -39,8 +105,20 @@ const Header = () => {
         }
         else 
         alert(response.data.message);
+await signInWithEmailAndPassword(auth, email, password);
+navigate("/"); 
+}catch(err){
+setErr(true);
+}
+
+
 
    }
+
+   const onFileChange = (event)=>{
+    setFileName(event.target.files[0]);
+    // console.log(fileName);
+  }
 
 
   return (
@@ -144,6 +222,14 @@ const Header = () => {
                 <option value="Customer">Customer </option>
                 <option value="Builder">Builder</option>
               </select>
+              <input className="form-styling input-group-append text-black" onChange={onFileChange} type="file" />
+               
+              {/* <label htmlFor="file">
+                    <img src={Add} alt=""/>
+                    <span>Add an avatar</span>
+                </label> */}
+               
+
               <div className="form-group mb-2  mt-5">
                 <button onClick={signup}  className="form-control btn btn-primary rounded submit px-3">Sign Up</button>
               </div>

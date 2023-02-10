@@ -22,7 +22,7 @@ const Nav = () => {
       <ul>
         <li><Link  to="/createPost">Create Post </Link></li>
         <li><Link  to="/savePost">Saved Post</Link></li>
-        <li><Link  to="#">Notification</Link></li>
+        <li><Link  to="#">Chat</Link></li>
         <li><Link  to="/">Logout</Link></li>
       </ul>
     </nav>

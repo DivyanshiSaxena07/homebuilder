@@ -215,8 +215,8 @@ console.log(posts);
                   <span   className="container" style={{marginRight:'20px'}} >
 		               	{/* {liked === false ? (<FaHeart style={{color: 'black', fontSize: '30px'}}/>) : (<FaRegHeart style={{color: 'black', fontSize: '30px'}}/>)} */}
 
-                    <BsBookmark style={{color: 'black', fontSize: '28px',position:'absolute',marginRight:'5px'}}id={"fill"+index}  onClick={() => save(index,item._id)} />
-                    < BsBookmarkFill style={{color:'black',fontSize:'28px',position:'absolute',display:"none"}} id={"empty"+index} onClick={() => save(index,item._id)}/>
+                    <BsBookmark style={{color: 'black', fontSize: '28px',position:'absolute',marginRight:'5px'}}id={"fill"+index}  onClick={() => save(index,item._id,item.postImage)} />
+                    < BsBookmarkFill style={{color:'black',fontSize:'28px',position:'absolute',display:"none"}} id={"empty"+index} onClick={() => save(index,item._id,item.postImage)}/>
 		              
 
                     </span>

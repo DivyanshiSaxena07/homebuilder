@@ -40,7 +40,7 @@ const Signup = () => {
               </div>
               <div className="form-group d-md-flex">
                 <div className="w-100 text-center">
-                  <a href="#" className="forgot">I'm already a member</a>
+                  <a href="/login" className="forgot">I'm already a member</a>
                 </div>
               </div>
             </form>

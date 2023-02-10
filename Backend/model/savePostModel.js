@@ -7,7 +7,6 @@ const savedPostSchema = new mongoose.Schema({
     postList:[
         {
             postId:mongoose.Schema.ObjectId,
-            postName: String,
             postImage: String
         }
     ]
